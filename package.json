@@ -1,0 +1,15 @@
+{
+  "name": "01.score_game_real_time_ts",
+  "version": "1.0.0",
+  "description": "A ts project that displays information about football players",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
