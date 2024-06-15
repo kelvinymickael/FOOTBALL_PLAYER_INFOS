@@ -38,9 +38,6 @@ function active() {
 }
 
 // API:
-const API_URL = "https://apiv3.apifootball.com/";
-const API_KEY =
-  "7a12383b8a187e43f23ef4b4dc0157c0a0018317478883d63a92b2c47dde2426";
 
 // Function to fetch data player:
 async function fetchDataPlayer(namePlayer: string) {
