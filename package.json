@@ -4,13 +4,16 @@
   "description": "A ts project that displays information about football players",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -w"
+    "build": "tsc -w",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.14.2",
+    "gh-pages": "^6.1.1",
     "typescript": "^5.4.5"
   },
   "dependencies": {
