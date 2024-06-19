@@ -6,6 +6,7 @@ interface IPlayer {
   player_number: string;
   player_age: string;
   team_name: string;
+  player_key: number;
 }
 
 // Select Elements:
@@ -27,6 +28,9 @@ const playerImage = document.querySelector(
 const playerCharacteristics = document.querySelectorAll(
   "#player-characteristics span strong"
 );
+const searchTitle = document.querySelector(".search-title");
+const loadingData = document.querySelector(".loading");
+
 const playerName = document.getElementById("player-name")!;
 const playerNumber = document.getElementById("player-number")!;
 const playerAge = document.getElementById("player-age")!;
@@ -38,6 +42,9 @@ function active() {
 }
 
 // API:
+const API_URL = "https://apiv3.apifootball.com/";
+const API_KEY =
+  "7a12383b8a187e43f23ef4b4dc0157c0a0018317478883d63a92b2c47dde2426";
 
 // Function to fetch data player:
 async function fetchDataPlayer(namePlayer: string) {
@@ -57,14 +64,29 @@ async function fetchDataPlayer(namePlayer: string) {
 }
 
 buttonSearchPlayer.addEventListener("click", () => {
+  document.body.querySelector(".loading")?.classList.remove("hidden");
+  containerPlayer.classList.add("hidden");
+
   fetchDataPlayer(inputSearch.value).then((data) => {
+    if (inputSearch.value === "") {
+      searchTitle?.classList.remove("hidden");
+      loadingData?.classList.add("hidden");
+    }
+
     let playerData = data;
     playerData.forEach((item: IPlayer) => {
-      playerImage.src = item.player_image;
-      playerName.textContent = item.player_name;
-      playerNumber.textContent = item.player_number;
-      playerAge.textContent = item.player_age;
-      playerTeam.textContent = item.team_name;
+      if (item.player_key) {
+        searchTitle?.classList.add("hidden");
+        containerPlayer.classList.remove("hidden");
+
+        if (item.player_image) {
+          playerImage.src = item.player_image;
+        }
+        playerName.textContent = item.player_name;
+        playerNumber.textContent = item.player_number;
+        playerAge.textContent = item.player_age;
+        playerTeam.textContent = item.team_name;
+      }
     });
   });
 });
