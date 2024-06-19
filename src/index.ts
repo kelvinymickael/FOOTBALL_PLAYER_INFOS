@@ -37,7 +37,7 @@ const playerAge = document.getElementById("player-age")!;
 const playerTeam = document.getElementById("player-team")!;
 
 // Function to select sport:
-function active() {
+function selectSport() {
   containerSports.classList.toggle("active");
 }
 
@@ -82,6 +82,7 @@ buttonSearchPlayer.addEventListener("click", () => {
         if (item.player_image) {
           playerImage.src = item.player_image;
         }
+
         playerName.textContent = item.player_name;
         playerNumber.textContent = item.player_number;
         playerAge.textContent = item.player_age;
