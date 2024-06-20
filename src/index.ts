@@ -37,9 +37,12 @@ const playerAge = document.getElementById("player-age")!;
 const playerTeam = document.getElementById("player-team")!;
 
 // Function to select sport:
-function selectSport() {
+function handleActiveSport() {
   containerSports.classList.toggle("active");
 }
+
+// Function to check if some sport is selected:
+
 
 // API:
 const API_URL = "https://apiv3.apifootball.com/";

@@ -20,7 +20,7 @@ const playerName = document.getElementById("player-name");
 const playerNumber = document.getElementById("player-number");
 const playerAge = document.getElementById("player-age");
 const playerTeam = document.getElementById("player-team");
-function selectSport() {
+function handleActiveSport() {
     containerSports.classList.toggle("active");
 }
 const API_URL = "https://apiv3.apifootball.com/";

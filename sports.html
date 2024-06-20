@@ -19,14 +19,21 @@
     <div id="screen-select-sports">
       <h1 class="title">Select your favorite sport</h1>
 
-      <div id="container-sports" onclick="selectSport()">
+      <div id="container-sports" onclick="handleActiveSport()">
         <div id="football">
           <img src="./dist/img/football.svg" alt="Image of soccer ball" />
           <strong>Footbal</strong>
         </div>
       </div>
 
-      <a type="button" class="button-started" href="./search.html"> Start </a>
+      <a
+        type="button"
+        class="button-started"
+        href="./search.html"
+        onclick="handleSelectSport()"
+      >
+        Start
+      </a>
     </div>
 
     <script src="./dist/js/index.js"></script>
