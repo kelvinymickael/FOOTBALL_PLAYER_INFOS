@@ -9,16 +9,23 @@ interface IPlayer {
   player_key: number;
 }
 
+// API:
+const API_URL = "https://apiv3.apifootball.com/";
+const API_KEY =
+  "7a12383b8a187e43f23ef4b4dc0157c0a0018317478883d63a92b2c47dde2426";
+
 // Select Elements:
 const containerSports = document.getElementById(
   "container-sports"
 ) as HTMLDivElement;
+const modalWarning = document.querySelector(".modal-warning");
 const inputSearch = document.querySelector(
   "#input-search input"
 ) as HTMLInputElement;
 const buttonSearchPlayer = document.getElementById(
   "button-search-player"
 ) as HTMLButtonElement;
+const buttonStarted = document.querySelector(".button-started");
 const containerPlayer = document.getElementById(
   "container-player"
 ) as HTMLDivElement;
@@ -37,17 +44,29 @@ const playerAge = document.getElementById("player-age")!;
 const playerTeam = document.getElementById("player-team")!;
 
 // Function to select sport:
-function handleActiveSport() {
+buttonStarted?.addEventListener("click", (e): void => {
+  if (!containerSports.classList.contains("active")) {
+    e.preventDefault();
+    openModal();
+  }
+});
+
+// Function to select sport:
+function handleActiveSport(): void {
   containerSports.classList.toggle("active");
 }
 
-// Function to check if some sport is selected:
+// Function to open modal:
+function openModal(): void {
+  modalWarning?.classList.remove("close-modal");
+  modalWarning?.classList.add("open-modal");
+}
 
-
-// API:
-const API_URL = "https://apiv3.apifootball.com/";
-const API_KEY =
-  "7a12383b8a187e43f23ef4b4dc0157c0a0018317478883d63a92b2c47dde2426";
+// Function to close modal:
+function closeModal(): void {
+  modalWarning?.classList.remove("open-modal");
+  modalWarning?.classList.add("close-modal");
+}
 
 // Function to fetch data player:
 async function fetchDataPlayer(namePlayer: string) {
@@ -78,11 +97,17 @@ buttonSearchPlayer.addEventListener("click", () => {
 
     let playerData = data;
     playerData.forEach((item: IPlayer) => {
+      console.log(item);
+      inputSearch.value = "";
+
       if (item.player_key) {
         searchTitle?.classList.add("hidden");
         containerPlayer.classList.remove("hidden");
 
-        if (item.player_image) {
+        if (!item.player_image) {
+          playerImage.classList.add("hidden");
+        } else {
+          playerImage.classList.remove("hidden");
           playerImage.src = item.player_image;
         }
 

@@ -8,9 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+const API_URL = "https://apiv3.apifootball.com/";
+const API_KEY = "7a12383b8a187e43f23ef4b4dc0157c0a0018317478883d63a92b2c47dde2426";
 const containerSports = document.getElementById("container-sports");
+const modalWarning = document.querySelector(".modal-warning");
 const inputSearch = document.querySelector("#input-search input");
 const buttonSearchPlayer = document.getElementById("button-search-player");
+const buttonStarted = document.querySelector(".button-started");
 const containerPlayer = document.getElementById("container-player");
 const playerImage = document.querySelector("#player-image img");
 const playerCharacteristics = document.querySelectorAll("#player-characteristics span strong");
@@ -20,11 +24,23 @@ const playerName = document.getElementById("player-name");
 const playerNumber = document.getElementById("player-number");
 const playerAge = document.getElementById("player-age");
 const playerTeam = document.getElementById("player-team");
+buttonStarted === null || buttonStarted === void 0 ? void 0 : buttonStarted.addEventListener("click", (e) => {
+    if (!containerSports.classList.contains("active")) {
+        e.preventDefault();
+        openModal();
+    }
+});
 function handleActiveSport() {
     containerSports.classList.toggle("active");
 }
-const API_URL = "https://apiv3.apifootball.com/";
-const API_KEY = "7a12383b8a187e43f23ef4b4dc0157c0a0018317478883d63a92b2c47dde2426";
+function openModal() {
+    modalWarning === null || modalWarning === void 0 ? void 0 : modalWarning.classList.remove("close-modal");
+    modalWarning === null || modalWarning === void 0 ? void 0 : modalWarning.classList.add("open-modal");
+}
+function closeModal() {
+    modalWarning === null || modalWarning === void 0 ? void 0 : modalWarning.classList.remove("open-modal");
+    modalWarning === null || modalWarning === void 0 ? void 0 : modalWarning.classList.add("close-modal");
+}
 function fetchDataPlayer(namePlayer) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -50,10 +66,16 @@ buttonSearchPlayer.addEventListener("click", () => {
         }
         let playerData = data;
         playerData.forEach((item) => {
+            console.log(item);
+            inputSearch.value = "";
             if (item.player_key) {
                 searchTitle === null || searchTitle === void 0 ? void 0 : searchTitle.classList.add("hidden");
                 containerPlayer.classList.remove("hidden");
-                if (item.player_image) {
+                if (!item.player_image) {
+                    playerImage.classList.add("hidden");
+                }
+                else {
+                    playerImage.classList.remove("hidden");
                     playerImage.src = item.player_image;
                 }
                 playerName.textContent = item.player_name;

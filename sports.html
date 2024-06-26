@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Phosphor Icons: -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <!-- Fonts: -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
@@ -26,14 +28,14 @@
         </div>
       </div>
 
-      <a
-        type="button"
-        class="button-started"
-        href="./search.html"
-        onclick="handleSelectSport()"
-      >
-        Start
-      </a>
+      <div id="modal">
+        <div class="modal-warning close-modal">
+          <i class="ph ph-x" onclick="closeModal()"></i>
+          <p>Por favor, selecione algum esporte para continuar!</p>
+        </div>
+      </div>
+
+      <a type="button" class="button-started" href="./search.html"> Start </a>
     </div>
 
     <script src="./dist/js/index.js"></script>
